@@ -10,3 +10,9 @@
   align-content: start;
   gap: 1.6rem;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--color-light--2);
+  border-radius: 5px;
+}

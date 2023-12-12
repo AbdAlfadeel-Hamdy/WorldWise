@@ -1,23 +1,17 @@
+import { useParams } from 'react-router-dom';
+import { formatDate } from '../utils';
+import { CityType } from '../types';
 import styles from './City.module.css';
 
-const formatDate = (date: string) =>
-  new Intl.DateTimeFormat('en', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    weekday: 'long',
-  }).format(new Date(date));
+type CityProps = {
+  cities: CityType[];
+};
 
-const City = () => {
-  // TEMP DATA
-  const currentCity = {
-    cityName: 'Lisbon',
-    emoji: '🇵🇹',
-    date: '2027-10-31T15:59:59.138Z',
-    notes: 'My favorite city so far!',
-  };
-
-  const { cityName, emoji, date, notes } = currentCity;
+const City: React.FC<CityProps> = ({ cities }) => {
+  const { id } = useParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
+  const currentCity = cities.find((city) => id && city.id === +id);
+  const { cityName, emoji, date, notes } = currentCity || {};
 
   return (
     <div className={styles.city}>
@@ -30,7 +24,7 @@ const City = () => {
 
       <div className={styles.row}>
         <h6>You went to {cityName} on</h6>
-        <p>{formatDate(date)}</p>
+        <p>{date && formatDate(date)}</p>
       </div>
 
       {notes && (

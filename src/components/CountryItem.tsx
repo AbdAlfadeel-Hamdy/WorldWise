@@ -1,10 +1,8 @@
+import { Country } from '../types';
 import styles from './CountryItem.module.css';
 
 interface CountryItemProps {
-  country: {
-    emoji: string;
-    country: string;
-  };
+  country: Country;
 }
 
 const CountryItem: React.FC<CountryItemProps> = ({ country }) => {
