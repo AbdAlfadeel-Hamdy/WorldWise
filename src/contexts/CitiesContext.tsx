@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 import { customFetch } from '../utils';
 import { CityType } from '../types';
 
@@ -6,6 +12,8 @@ import { CityType } from '../types';
 type CitiesContextType = {
   cities: CityType[];
   isLoading: boolean;
+  currentCity: CityType;
+  getCity: (id: number) => Promise<void>;
 };
 
 const CitiesContext = createContext({} as CitiesContextType);
@@ -26,6 +34,8 @@ type CitiesProviderProps = {
 const CitiesProvider = ({ children }: CitiesProviderProps) => {
   const [cities, setCities] = useState([] as CityType[]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentCity, setCurrentCity] = useState({} as CityType);
+
   // Fetch Cities
   useEffect(() => {
     const fetchCities = async () => {
@@ -42,8 +52,22 @@ const CitiesProvider = ({ children }: CitiesProviderProps) => {
     fetchCities();
   }, []);
 
+  // Get City
+  const getCity = useCallback(async (id: number) => {
+    setIsLoading(true);
+    try {
+      const { data } = await customFetch(`/cities.json`);
+      const city = (data as CityType[]).find((city) => city.id === id);
+      if (city) setCurrentCity(city);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
   return (
-    <CitiesContext.Provider value={{ cities, isLoading }}>
+    <CitiesContext.Provider value={{ cities, isLoading, currentCity, getCity }}>
       {children}
     </CitiesContext.Provider>
   );

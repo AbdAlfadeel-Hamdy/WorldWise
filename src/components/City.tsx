@@ -1,14 +1,22 @@
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import Spinner from './Spinner';
 import { useCities } from '../contexts';
 import { formatDate } from '../utils';
 import styles from './City.module.css';
+import BackButton from './BackButton';
 
 const City = () => {
   const { id } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { cities } = useCities();
-  const currentCity = cities.find((city) => id && city.id === +id);
-  const { cityName, emoji, date, notes } = currentCity || {};
+  const { isLoading, currentCity, getCity } = useCities();
+  const { cityName, emoji, date, notes } = currentCity;
+
+  // Fetch City
+  useEffect(() => {
+    if (id) getCity(+id);
+  }, [id, getCity]);
+
+  if (isLoading) return <Spinner />;
 
   return (
     <div className={styles.city}>
@@ -42,7 +50,9 @@ const City = () => {
         </a>
       </div>
 
-      <div>{/* <ButtonBack /> */}</div>
+      <div>
+        <BackButton />
+      </div>
     </div>
   );
 };
