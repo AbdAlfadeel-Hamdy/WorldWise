@@ -1,15 +1,12 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useCities } from '../contexts';
 import { formatDate } from '../utils';
-import { CityType } from '../types';
 import styles from './City.module.css';
 
-type CityProps = {
-  cities: CityType[];
-};
-
-const City: React.FC<CityProps> = ({ cities }) => {
+const City = () => {
   const { id } = useParams();
-  // const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { cities } = useCities();
   const currentCity = cities.find((city) => id && city.id === +id);
   const { cityName, emoji, date, notes } = currentCity || {};
 

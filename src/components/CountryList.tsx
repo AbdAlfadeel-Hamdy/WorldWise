@@ -1,12 +1,10 @@
-import { CityType, Country } from '../types';
 import CountryItem from './CountryItem';
+import { Country } from '../types';
 import styles from './CountryList.module.css';
+import { useCities } from '../contexts';
 
-type CountryListProps = {
-  cities: CityType[];
-};
-
-const CountryList: React.FC<CountryListProps> = ({ cities }) => {
+const CountryList = () => {
+  const { cities } = useCities();
   const filterObj = {} as { [key: string]: number };
   const countries: Country[] = cities.filter((city) => {
     filterObj[city.country] = filterObj[city.country]
