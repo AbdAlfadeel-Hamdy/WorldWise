@@ -10,16 +10,25 @@ import {
 } from 'react-leaflet';
 import { LatLngTuple } from 'leaflet';
 import { useCities } from '../contexts';
+import { useGeolocation } from '../hooks';
+import Button from './Button';
 import styles from './Map.module.css';
 
 const Map = () => {
-  const [searchParams] = useSearchParams();
-  const mapLat = searchParams.get('lat');
-  const mapLng = searchParams.get('lng');
   const { cities } = useCities();
   const [mapPosition, setMapPosition] = useState([
     51.505, -0.09,
   ] as LatLngTuple);
+  const {
+    position: geolocationPosition,
+    isLoading: isLoadingPosition,
+    getPosition,
+  } = useGeolocation();
+
+  const [searchParams] = useSearchParams();
+  const mapLat = searchParams.get('lat');
+  const mapLng = searchParams.get('lng');
+
   // Rendering Markers
   const renderedMarkers = cities.map((city) => (
     <Marker key={city.id} position={[city.position.lat, city.position.lng]}>
@@ -30,13 +39,23 @@ const Map = () => {
       ) : null}
     </Marker>
   ));
+
   // Set Map Position when URL Query String changes
   useEffect(() => {
     if (mapLat && mapLng) setMapPosition([+mapLat, +mapLng]);
   }, [mapLat, mapLng]);
 
+  // Set Map to your Geolocation Position
+  useEffect(() => {
+    if (geolocationPosition)
+      setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
+  }, [geolocationPosition]);
+
   return (
     <div className={styles.mapContainer}>
+      <Button type='position' onClick={getPosition}>
+        {isLoadingPosition ? 'Loading...' : 'Use your position'}
+      </Button>
       <MapContainer
         center={mapPosition}
         zoom={7}
