@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useCities } from '../contexts';
 import { formatDate } from '../utils';
-import { CityType } from '../types';
+import { City } from '../types';
 import styles from './CityItem.module.css';
 
 type CityItemProps = {
-  city: CityType;
+  city: City;
 };
 
 const CityItem: React.FC<CityItemProps> = ({ city }) => {
@@ -23,7 +23,7 @@ const CityItem: React.FC<CityItemProps> = ({ city }) => {
       <Link
         to={`${id}?lat=${lat}&lng=${lng}`}
         className={`${styles.cityItem} ${
-          id === currentCity.id && styles['cityItem--active']
+          id === currentCity?.id && styles['cityItem--active']
         }`}
       >
         <span className={styles.emoji}>{emoji}</span>

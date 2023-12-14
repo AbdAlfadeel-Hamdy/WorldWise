@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Spinner from './Spinner';
 import { useCities } from '../contexts';
-import { formatDate } from '../utils';
-import styles from './City.module.css';
+import Spinner from './Spinner';
 import BackButton from './BackButton';
+import { formatDate } from '../utils';
+import styles from './CityDetails.module.css';
 
-const City = () => {
+const CityDetails = () => {
   const { id } = useParams();
   const { isLoading, currentCity, getCity } = useCities();
-  const { cityName, emoji, date, notes } = currentCity;
 
   // Fetch City
   useEffect(() => {
@@ -17,6 +16,10 @@ const City = () => {
   }, [id, getCity]);
 
   if (isLoading) return <Spinner />;
+  //Temp
+  if (!currentCity) return <p>Error</p>;
+
+  const { cityName, emoji, date, notes } = currentCity;
 
   return (
     <div className={styles.city}>
@@ -57,4 +60,4 @@ const City = () => {
   );
 };
 
-export default City;
+export default CityDetails;

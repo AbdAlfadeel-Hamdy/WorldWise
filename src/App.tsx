@@ -8,7 +8,7 @@ import {
   Product,
 } from './pages';
 import { CitiesProvider } from './contexts';
-import { City, CityList, CountryList, Form } from './components';
+import { CityDetails, CityList, CountryList, Form } from './components';
 
 const App = () => {
   return (
@@ -23,7 +23,7 @@ const App = () => {
             <Route index element={<Navigate to='cities' replace />} />
             <Route path='cities' element={<CityList />} />
             <Route path='countries' element={<CountryList />} />
-            <Route path='cities/:id' element={<City />} />
+            <Route path='cities/:id' element={<CityDetails />} />
             <Route path='form' element={<Form />} />
           </Route>
           <Route path='*' element={<PageNotFound />} />

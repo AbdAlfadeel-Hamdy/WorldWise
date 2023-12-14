@@ -1,1 +1,1 @@
-export type { City as CityType, Country } from './city';
+export type { City, Country } from './city';

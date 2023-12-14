@@ -6,13 +6,13 @@ import {
   useCallback,
 } from 'react';
 import { customFetch } from '../utils';
-import { CityType } from '../types';
+import { City } from '../types';
 
 // Cities Context
 type CitiesContextType = {
-  cities: CityType[];
+  cities: City[];
   isLoading: boolean;
-  currentCity: CityType;
+  currentCity: City | null;
   getCity: (id: number) => Promise<void>;
 };
 
@@ -32,9 +32,9 @@ type CitiesProviderProps = {
 };
 
 const CitiesProvider = ({ children }: CitiesProviderProps) => {
-  const [cities, setCities] = useState([] as CityType[]);
+  const [cities, setCities] = useState([] as City[]);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentCity, setCurrentCity] = useState({} as CityType);
+  const [currentCity, setCurrentCity] = useState<City | null>(null);
 
   // Fetch Cities
   useEffect(() => {
@@ -57,7 +57,7 @@ const CitiesProvider = ({ children }: CitiesProviderProps) => {
     setIsLoading(true);
     try {
       const { data } = await customFetch(`/cities.json`);
-      const city = (data as CityType[]).find((city) => city.id === id);
+      const city = (data as City[]).find((city) => city.id === id);
       if (city) setCurrentCity(city);
     } catch (err) {
       console.log(err);
