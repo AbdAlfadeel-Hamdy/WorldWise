@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   MapContainer,
   TileLayer,
@@ -10,7 +10,7 @@ import {
 } from 'react-leaflet';
 import { LatLngTuple } from 'leaflet';
 import { useCities } from '../contexts';
-import { useGeolocation } from '../hooks';
+import { useGeolocation, useUrlPosition } from '../hooks';
 import Button from './Button';
 import styles from './Map.module.css';
 
@@ -24,10 +24,7 @@ const Map = () => {
     isLoading: isLoadingPosition,
     getPosition,
   } = useGeolocation();
-
-  const [searchParams] = useSearchParams();
-  const mapLat = searchParams.get('lat');
-  const mapLng = searchParams.get('lng');
+  const [mapLat, mapLng] = useUrlPosition();
 
   // Rendering Markers
   const renderedMarkers = cities.map((city) => (
