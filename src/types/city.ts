@@ -4,7 +4,7 @@ type Country = {
 };
 
 type City = Country & {
-  id: number;
+  id?: number;
   cityName: string;
   date: string;
   notes: string;
