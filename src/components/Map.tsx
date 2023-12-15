@@ -9,7 +9,7 @@ import {
   useMapEvents,
 } from 'react-leaflet';
 import { LatLngTuple } from 'leaflet';
-import { useCities } from '../contexts';
+import { useCities } from '../hooks';
 import { useGeolocation, useUrlPosition } from '../hooks';
 import Button from './Button';
 import styles from './Map.module.css';

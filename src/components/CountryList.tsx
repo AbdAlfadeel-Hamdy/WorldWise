@@ -1,7 +1,7 @@
 import CountryItem from './CountryItem';
 import { Country } from '../types';
 import styles from './CountryList.module.css';
-import { useCities } from '../contexts';
+import { useCities } from '../hooks';
 
 const CountryList = () => {
   const { cities } = useCities();

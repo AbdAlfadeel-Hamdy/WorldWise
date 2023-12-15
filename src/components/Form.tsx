@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useUrlPosition } from '../hooks';
-import { useCities } from '../contexts';
+import { useCities } from '../hooks';
 import Button from './Button';
 import BackButton from './BackButton';
 import Spinner from './Spinner';
