@@ -5,7 +5,7 @@ interface CountryItemProps {
   country: Country;
 }
 
-const CountryItem: React.FC<CountryItemProps> = ({ country }) => {
+const CountryItem = ({ country }: CountryItemProps) => {
   return (
     <li className={styles.countryItem}>
       <span>{country.emoji}</span>

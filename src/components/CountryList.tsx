@@ -1,10 +1,11 @@
+import { useCities } from '../hooks';
 import CountryItem from './CountryItem';
 import { Country } from '../types';
 import styles from './CountryList.module.css';
-import { useCities } from '../hooks';
 
 const CountryList = () => {
   const { cities } = useCities();
+
   const filterObj = {} as { [key: string]: number };
   const countries: Country[] = cities.filter((city) => {
     filterObj[city.country] = filterObj[city.country]
@@ -14,6 +15,7 @@ const CountryList = () => {
       ? null
       : { country: city.country, emoji: city.emoji };
   });
+
   return (
     <ul className={styles.countryList}>
       {countries.map((country) => (

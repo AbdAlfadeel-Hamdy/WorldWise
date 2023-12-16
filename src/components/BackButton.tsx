@@ -3,6 +3,7 @@ import Button from './Button';
 
 const BackButton = () => {
   const navigate = useNavigate();
+
   return (
     <Button
       type='back'

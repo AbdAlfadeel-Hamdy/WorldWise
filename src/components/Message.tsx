@@ -4,7 +4,7 @@ interface MessageProps {
   message: string;
 }
 
-const Message: React.FC<MessageProps> = ({ message }) => {
+const Message = ({ message }: MessageProps) => {
   return (
     <p className={styles.message}>
       <span role='img'>👋</span> {message}

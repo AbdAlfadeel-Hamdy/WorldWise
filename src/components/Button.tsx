@@ -6,7 +6,7 @@ type ButtonProps = {
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Button: React.FC<ButtonProps> = ({ children, type, onClick }) => {
+const Button = ({ children, type, onClick }: ButtonProps) => {
   return (
     <button className={`${styles.btn} ${styles[type]}`} onClick={onClick}>
       {children}

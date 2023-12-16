@@ -8,7 +8,7 @@ type CityItemProps = {
   city: City;
 };
 
-const CityItem: React.FC<CityItemProps> = ({ city }) => {
+const CityItem = ({ city }: CityItemProps) => {
   const { currentCity, deleteCity } = useCities();
   const {
     id,
