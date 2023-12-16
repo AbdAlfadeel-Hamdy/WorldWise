@@ -106,7 +106,7 @@ type CitiesProviderProps = {
   children: React.ReactNode;
 };
 
-const CitiesProvider = ({ children }: CitiesProviderProps) => {
+export const CitiesProvider = ({ children }: CitiesProviderProps) => {
   const [{ cities, isLoading, error, currentCity }, dispatch] = useReducer(
     reducer,
     initialState
@@ -209,5 +209,3 @@ const CitiesProvider = ({ children }: CitiesProviderProps) => {
     </CitiesContext.Provider>
   );
 };
-
-export { CitiesProvider };
