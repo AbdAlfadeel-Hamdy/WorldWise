@@ -64,7 +64,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const login = (email: string, password: string) => {
     console.log(email, password);
-    const user = { name: 'gonz', avatar: 'g' };
+    const user = {
+      name: 'Jack',
+      avatar: 'https://i.pravatar.cc/100?u=zz',
+    };
     dispatch({ type: 'login', payload: user });
   };
 
