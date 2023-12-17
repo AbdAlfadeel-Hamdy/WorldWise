@@ -7,3 +7,4 @@ export { default as CityDetails } from './CityDetails';
 export { default as Form } from './Form';
 export { default as Button } from './Button';
 export { default as User } from './User';
+export { default as SpinnerFullPage } from './SpinnerFullPage';

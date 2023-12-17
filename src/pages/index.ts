@@ -1,7 +1,9 @@
-export { default as Homepage } from './Homepage';
-export { default as Product } from './Product';
-export { default as Pricing } from './Pricing';
-export { default as Login } from './Login';
-export { default as AppLayout } from './AppLayout';
-export { default as PageNotFound } from './PageNotFound';
-export { default as ProtectedRoute } from './ProtectedRoute';
+import { lazy } from 'react';
+
+export const Homepage = lazy(() => import('./Homepage'));
+export const Product = lazy(() => import('./Product'));
+export const Pricing = lazy(() => import('./Pricing'));
+export const Login = lazy(() => import('./Login'));
+export const AppLayout = lazy(() => import('./AppLayout'));
+export const PageNotFound = lazy(() => import('./PageNotFound'));
+export const ProtectedRoute = lazy(() => import('./ProtectedRoute'));
